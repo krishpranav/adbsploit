@@ -926,3 +926,19 @@ def process_list():
             print(arrow + ("[{0}+{1}] An error ocurred listing the processes..").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# shows tcp ip
+def tcpip():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the port").format(Fore.RED, Fore.WHITE))
+            port = input(arrow + " adbsploit" + Fore.RED + "(tcpip) " + Fore.WHITE + "> ")
+            if port == '':
+                print(Fore.RED + "You must specify a port to listen on your device...")
+            else:
+                os.system("adb -s " + device + " tcpip " + port)
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred enabling the tcpip mode..").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
