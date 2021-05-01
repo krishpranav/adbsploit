@@ -557,3 +557,24 @@ def netstat():
             print(arrow + ("[{0}+{1}] An error ocurred getting the netstat...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# on the aeroplane mode in the target device
+def airplane():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the name of the app (ex: com.whatsapp) ").format(Fore.RED, Fore.WHITE))
+            status = input(arrow + " adbsploit" + Fore.RED + "(airplane) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            if status == 'on':
+                d.switch_airplane(True)
+                print(arrow + Fore.GREEN + "The Airplane Mode is activated...")
+            elif status == 'off':
+                d.switch_airplane(False)
+                print(arrow + Fore.GREEN + "The Airplane Mode is deactivated...")
+            else:
+                print(arrow + Fore.RED + "The status value only accepts on or off")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred with airplane mode...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
