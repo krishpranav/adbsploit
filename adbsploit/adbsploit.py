@@ -883,4 +883,17 @@ def show_macaddress():
             print(arrow + ("[{0}+{1}] An error ocurred showing the mac address...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
-        
+
+# screen shot
+def screenshot():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the name of the screenshot").format(Fore.RED, Fore.WHITE))
+            name = input(arrow + " adbsploit" + Fore.RED + "(screenshot) " + Fore.WHITE + "> ")
+            os.system("adb -s " + device + " exec-out screencap -p >" + name + ".png")
+            print(arrow + Fore.GREEN + "An image is created with the name " + name + ".png ...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred making the screenshot...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
