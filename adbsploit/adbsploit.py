@@ -835,3 +835,26 @@ def screen():
             print(arrow + ("[{0}+{1}] An error ocurred during the swipe...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# unlock the screen
+def unlock_screen():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            if d.is_screen_on() == False:
+                print(
+                    arrow + ("[{0}+{1}] Specify the unlocking code, leave it blank if don't have code").format(Fore.RED,
+                                                                                                               Fore.WHITE))
+                code = input(arrow + " adbsploit" + Fore.RED + "(unlock_screen) " + Fore.WHITE + "> ")
+                d.switch_screen(True)
+                d.swipe(200, 900, 200, 300, 0.5)
+                d.shell("input text " + str(code))
+                d.keyevent(66)
+                print(arrow + Fore.GREEN + "The screen is unlocked...")
+            else:
+                print(arrow + Fore.GREEN + "The screen is already unlocked...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred unlocking the device...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
