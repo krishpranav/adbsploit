@@ -452,3 +452,24 @@ def logs():
             print(arrow + ("[{0}+{1}] An error ocurred getting the logs...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# start app
+def start_app():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the name of the app (ex: com.whatsapp) ").format(Fore.RED, Fore.WHITE))
+            app = input(arrow + " adbsploit" + Fore.RED + "(start_app) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Specify the activity, if not leave it blank) ").format(Fore.RED, Fore.WHITE))
+            activity = input(arrow + " adbsploit" + Fore.RED + "(start_app) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            if activity == '':
+                d.app_start(app)
+                print(Fore.GREEN + "The app " + app + " is now starting...")
+            else:
+                d.app_start(app, activity)
+                print(Fore.GREEN + "The app " + app + "with the activity " + activity + " is now starting...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred starting the app...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
