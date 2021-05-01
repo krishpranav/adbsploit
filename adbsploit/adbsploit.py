@@ -753,3 +753,21 @@ def show_keyevents(self):
     table.add_row("85", "TAG_LAST_KEYCODE")
     console = Console()
     console.print(table)
+
+# open browser in the target phone
+def open_browser():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the URL to open").format(Fore.RED, Fore.WHITE))
+            url = input(arrow + " adbsploit" + Fore.RED + "(open_browser) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            if url != '':
+                d.open_browser(url)
+                print(arrow + Fore.GREEN + 'The url ' + url + ' is now opening...')
+            else:
+                print(arrow + Fore.RED + 'The URL can not be null...')
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred opening the url...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
