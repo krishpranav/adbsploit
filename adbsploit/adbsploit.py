@@ -914,3 +914,15 @@ def dump_meminfo():
             print(arrow + ("[{0}+{1}] An error ocurred dumping the meminfo...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# shows background process list
+def process_list():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            print(arrow + Fore.GREEN + d.shell("ps -ef"))
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred listing the processes..").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
