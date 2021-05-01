@@ -1384,3 +1384,16 @@ def help():
     table.add_row('exit', 'Exit adbsploit', '', '')
     console = Console()
     console.print(table)
+
+# run script
+
+if __name__ == '__main__':
+    f = Figlet()
+    list = ["graffiti", "slant", "avatar", "bell", "big", "doom",
+            "standard", "stop"]
+    f.setFont(font=random.choice(list))
+    print(f.renderText('>_adbsploit'))
+    print("v0.2.1" + "\t \t \t \t" + "Developed by Krishpranav at " + Fore.RED + "https://github.com/krishpranav/adbsploit ")
+    print("")
+    print(Fore.WHITE + "Type" + Fore.RED + " help " + Fore.WHITE + "for more info")
+    main()
