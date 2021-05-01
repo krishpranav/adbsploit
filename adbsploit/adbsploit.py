@@ -1330,7 +1330,7 @@ def clear():
             "standard", "stop"]
     f.setFont(font=random.choice(list))
     print(f.renderText('>_adbsploit'))
-    print("v0.3" + "\t \t \t \t" + "Developed by MesQ at " + Fore.RED + "https://github.com/krishpranav/adbsploit ")
+    print("v0.3" + "\t \t \t \t" + "Developed by krishpranav at " + Fore.RED + "https://github.com/krishpranav/adbsploit ")
     print("")
     print(Fore.WHITE + "Type" + Fore.RED + " help " + Fore.WHITE + "for more info")
 
@@ -1341,7 +1341,7 @@ def version():
     table.add_column("Version", style="cyan")
     table.add_column("URL", style="magenta")
     table.add_column("Developed", style="magenta")
-    table.add_row('0.2.1', "https://github.com/krishpranav/adbsploit", 'MesQ')
+    table.add_row('0.2.1', "https://github.com/krishpranav/adbsploit", 'krishpranav')
     console = Console()
     console.print(table)
 
