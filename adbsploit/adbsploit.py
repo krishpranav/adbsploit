@@ -578,3 +578,41 @@ def airplane():
             print(arrow + ("[{0}+{1}] An error ocurred with airplane mode...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# adjust the volume in the target device
+def sound():
+    global device
+    if device != 'none':
+        try:
+            print(
+                arrow + ("[{0}+{1}] Specify the type of sound to modify (media/call/system/notifications/all) ").format(
+                    Fore.RED, Fore.WHITE))
+            type = input(arrow + " adbsploit" + Fore.RED + "(sound) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Specify the sound leve 0-15 ").format(Fore.RED, Fore.WHITE))
+            set = input(arrow + " adbsploit" + Fore.RED + "(sound) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            if type == 'media':
+                d.shell('media volume --stream 3 --set ' + set)
+                print(arrow + Fore.GREEN + 'The media volume is now set to ' + set + '...')
+            elif type == 'call':
+                d.shell('media volume --stream 0 --set ' + set)
+                print(arrow + Fore.GREEN + 'The call volume is now set to ' + set + '...')
+            elif type == 'system':
+                d.shell('media volume --stream 1 --set ' + set)
+                print(arrow + Fore.GREEN + "The system volume is now set to " + set + '...')
+            elif type == 'notifications':
+                d.shell('media volume --stream 2 --set ' + set)
+                print(arrow + Fore.GREEN + 'The notifications volume is now set to ' + set + '...')
+            elif type == 'all':
+                d.shell()
+                d.shell('media volume --stream 3 --set ' + set)
+                d.shell('media volume --stream 2 --set ' + set)
+                d.shell('media volume --stream 1 --set ' + set)
+                d.shell('media volume --stream 0 --set ' + set)
+                print(arrow + Fore.GREEN + 'The all volume types is now set to ' + set + '...')
+            else:
+                print(Fore.RED + "This type doesn't exists...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred with the sound...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
