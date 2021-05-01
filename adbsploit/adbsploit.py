@@ -1058,3 +1058,26 @@ def fastboot_mode():
             print(arrow + ("[{0}+{1}] An error ocurred entering in fastboot mode...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# kill process
+def kill_process():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            print(arrow + ("[{0}+{1}] Specify the PID").format(Fore.RED, Fore.WHITE))
+            pid = input(arrow + " adbsploit" + Fore.RED + "(kill-process) " + Fore.WHITE + "> ")
+            d.shell("taskkill /PID "+ pid)
+            print(arrow+Fore.GREEN+"Killing the process...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred killing the process...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# extract app detaisl, cache
+def extract_app():
+    global device
+    app = 'com.whatsapp'
+    d = adbutils.adb.device(device)
+    path = d.shell("pm path " + app)
+    d.shell("pull " + path[8:])
