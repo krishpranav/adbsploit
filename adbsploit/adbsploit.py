@@ -1045,3 +1045,16 @@ def recovery_mode():
             print(arrow + ("[{0}+{1}] An error ocurred entering in recovery mode...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# fast boot mode on
+def fastboot_mode():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            d.shell("reboot bootloader")
+            print(arrow+Fore.GREEN+"Entering in fastboot mode...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred entering in fastboot mode...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
