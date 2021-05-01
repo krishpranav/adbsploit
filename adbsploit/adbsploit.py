@@ -1259,3 +1259,77 @@ def evil_app():
             print(arrow + ("[{0}+{1}] An error ocurred killing the process...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+def backdoor():
+    global device
+    if device != 'none':
+        if shutil.which("msfvenom") is not None:
+            try:
+                d = adbutils.adb.device(device)
+                print(arrow + ("[{0}+{1}] Specify the payload: (com.whatsapp)").format(Fore.RED, Fore.WHITE))
+                table = Table()
+                table.add_column("Name", style="cyan")
+                table.add_column("Description", style="magenta")
+                table.add_row("meterpreter_reverse_http", "Android Meterpreter Reverse HTTP Stager")
+                table.add_row("meterpreter_reverse_https", "Android Meterpreter Reverse HTTPS Stager")
+                table.add_row("meterpreter_reverse_tcp", "Android Meterpreter Reverse TCP Stager")
+                table.add_row("meterpreter_reverse_http_inline", "Android Meterpreter Reverse HTTP Inline")
+                table.add_row("meterpreter_reverse_https_inline", "Android Meterpreter Reverse HTTPS Inline")
+                table.add_row("meterpreter_reverse_tcp_inline", "Android Meterpreter Reverse TCP Inline")
+                table.add_row("shell_reverse_http", "Android Command Shell Reverse HTTP Stager")
+                table.add_row("shell_reverse_https", "Android Command Shell Reverse HTTP Stager")
+                table.add_row("shell_reverse_tcp", "Android Command Shell Reverse HTTP Stager")
+                console = Console()
+                console.print(table)
+                print(arrow + ("[{0}+{1}] Specify the payload: (meterpreter_reverse_http)").format(Fore.RED, Fore.WHITE))
+                payload = input(arrow + " adbsploit" + Fore.RED + "(backdoor) " + Fore.WHITE + "> ")
+                if payload == "":
+                    print()
+                elif payload == "meterpreter_reverse_http":
+                    print()
+                elif payload == "meterpreter_reverse_https":
+                    print()
+                elif payload == "meterpreter_reverse_tcp":
+                    print()
+                elif payload == "meterpreter_reverse_http_inline":
+                    print()
+                elif payload == "meterpreter_reverse_https_inline":
+                    print()
+                elif payload == "meterpreter_reverse_tcp_inline":
+                    print()
+                elif payload == "shell_reverse_http":
+                    print()
+                elif payload == "shell_reverse_httpS":
+                    print()
+                elif payload == "shell_reverse_TCP":
+                    print()
+                else:
+                    print(arrow + ("[{0}+{1}] Select a correct payload...").format(Fore.RED, Fore.WHITE))
+            except:
+                print(arrow + ("[{0}+{1}] An error ocurred generating the backdoor...").format(Fore.RED, Fore.WHITE))
+        else:
+            print(arrow + ("[{0}+{1}] ADBSploit use Metasploit for generating backdoors, you must install to use this option").format(
+                Fore.RED, Fore.WHITE))
+            print(arrow + (
+                "[{0}+{1}] Install it via https://github.com/rapid7/metasploit-framework/wiki/Nightly-Installers ").format(
+                Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+
+def clear():
+    if sys.platform.startswith('win32'):
+        os.system('cls')
+    elif sys.platform.startswith('linux'):
+        os.system('clear')
+    elif sys.platform.startswith('darwin'):
+        os.system('clear')
+
+    f = Figlet()
+    list = ["graffiti", "slant", "avatar", "bell", "big", "doom",
+            "standard", "stop"]
+    f.setFont(font=random.choice(list))
+    print(f.renderText('>_adbsploit'))
+    print("v0.3" + "\t \t \t \t" + "Developed by MesQ at " + Fore.RED + "https://github.com/krishpranav/adbsploit ")
+    print("")
+    print(Fore.WHITE + "Type" + Fore.RED + " help " + Fore.WHITE + "for more info")
