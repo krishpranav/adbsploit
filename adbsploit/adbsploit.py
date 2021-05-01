@@ -1081,3 +1081,99 @@ def extract_app():
     d = adbutils.adb.device(device)
     path = d.shell("pm path " + app)
     d.shell("pull " + path[8:])
+
+# screen recorder
+def screenrecord():
+    global device
+    if device != 'none':
+        print(arrow + ("[{0}+{1}] Introduce the path and file name: (/home/user/Desktop/record.mp4)").format(Fore.RED, Fore.WHITE))
+        ans = input(arrow + " adbsploit" + Fore.RED + "(kill-process) " + Fore.WHITE + "> ")
+        try:
+            if sys.platform.startswith('win32'):
+                if shutil.which("scrcpy") is not None:
+                    if ans == "":
+                        subprocess.Popen(['scrcpy -r record.mp4 -s ' + device],
+                                         shell=True,
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.STDOUT, )
+                    else:
+                        subprocess.Popen(['scrcpy -r ' + ans + ' -s ' + device],
+                                         shell=True,
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.STDOUT, )
+
+                else:
+                    print(arrow + ("[{0}+{1}] ADBSploit use scrcpy to remote control").format(Fore.RED, Fore.WHITE))
+                    print(arrow + (
+                        "[{0}+{1}] You must install it from https://github.com/Genymobile/scrcpy/releases").format(
+                        Fore.RED, Fore.WHITE))
+
+            elif sys.platform.startswith('linux'):
+                if shutil.which("scrcpy") is not None:
+                    if ans == "":
+                        subprocess.Popen(['scrcpy -r record.mp4 -s ' + device],
+                                         shell=True,
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.STDOUT, )
+                    else:
+                        subprocess.Popen(['scrcpy -r ' + ans + ' -s ' + device],
+                                         shell=True,
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.STDOUT, )
+                else:
+                    print(arrow + (
+                        "[{0}+{1}] ADBSploit use scrcpy to remote control, do you want to install it? (y/n)").format(
+                        Fore.RED, Fore.WHITE))
+                    ans = input(arrow + " adbsploit" + Fore.RED + "(remote-control) " + Fore.WHITE + "> ")
+                    if ans == "y" or ans == "Y":
+                        subprocess.Popen('sudo apt-get install scrcpy', shell=True)
+                    elif ans == "n" or ans == "N":
+                        print(arrow + (
+                            "[{0}+{1}] Continue with ADBSploit...").format(
+                            Fore.RED, Fore.WHITE))
+                    else:
+                        print(arrow + (
+                            "[{0}+{1}] The option is incorrect please try again").format(
+                            Fore.RED, Fore.WHITE))
+            elif sys.platform.startswith('darwin'):
+                if shutil.which("scrcpy") is not None:
+                    if ans == "":
+                        subprocess.Popen(['scrcpy -r record.mp4 -s ' + device],
+                                         shell=True,
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.STDOUT, )
+                    else:
+                        subprocess.Popen(['scrcpy -r ' + ans + ' -s ' + device],
+                                         shell=True,
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.STDOUT, )
+                else:
+                    print(arrow + (
+                        "[{0}+{1}] ADBSploit use scrcpy to remote control, do you want to install it? (y/n)").format(
+                        Fore.RED, Fore.WHITE))
+                    ans = input(arrow + " adbsploit" + Fore.RED + "(remote-control) " + Fore.WHITE + "> ")
+                    if ans == "y" or ans == "Y":
+                        subprocess.call(
+                            '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"',
+                            shell=True)
+                        subprocess.call('brew install scrcpy', shell=True)
+                    elif ans == "n" or ans == "N":
+                        print(arrow + (
+                            "[{0}+{1}] Continue with ADBSploit...").format(
+                            Fore.RED, Fore.WHITE))
+                    else:
+                        print(arrow + (
+                            "[{0}+{1}] The option is incorrect please try again").format(
+                            Fore.RED, Fore.WHITE))
+            else:
+                print(arrow + ("[{0}+{1}] An error ocurred streaming the screen...").format(Fore.RED, Fore.WHITE))
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred streaming the screen...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
