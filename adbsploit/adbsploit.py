@@ -435,3 +435,20 @@ def get_folder():
             print(arrow + ("[{0}+{1}] An error ocurred pulling the folder...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# get phone logs
+def logs():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] You want all the logs or only an app? (all/package_name) ").format(Fore.RED,
+                                                                                                         Fore.WHITE))
+            app = input(arrow + " adbsploit" + Fore.RED + "(logs) " + Fore.WHITE + "> ")
+            if app == "all":
+                os.system('adb -s ' + device + " logcat ")
+            else:
+                os.system('adb -s ' + device + " logcat " + "app")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred getting the logs...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
