@@ -419,3 +419,19 @@ def kill_server():
         print(arrow + Fore.GREEN + 'The server is down...')
     except:
         print(arrow + ("[{0}+{1}] An error ocurred killing the server...").format(Fore.RED, Fore.WHITE))
+
+# get folders in the target device
+def get_folder():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Enter the path of the folder to pull").format(Fore.RED, Fore.WHITE))
+            path = input(arrow + " adbsploit" + Fore.RED + "(get_folder) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Enter the path of the destination").format(Fore.RED, Fore.WHITE))
+            name = input(arrow + " adbsploit" + Fore.RED + "(get_folder) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            d.sync.pull(path, name)
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred pulling the folder...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
