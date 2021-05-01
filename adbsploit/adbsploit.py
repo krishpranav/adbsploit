@@ -214,16 +214,16 @@ def devices():
     console = Console()
     console.print(table)
 
-# connecting to phone service
+# connecting to device service
 def connect():
-    print(("[{0}+{1}] Enter the phone IP address to connect").format(Fore.RED, Fore.WHITE))
+    print(("[{0}+{1}] Enter the device IP address to connect").format(Fore.RED, Fore.WHITE))
     dev = input(arrow + " adbsploit" + Fore.RED + "(connect) " + Fore.WHITE + "> ")
     output = adbutils.adb.connect(dev)
     print(arrow + Fore.GREEN + " * " + output)
 
-# selecting the phones
+# selecting the devices
 def select():
-	print(("[{0}+{1}] Enter the phone serial").format(Fore.RED, Fore.WHITE))
+	print(("[{0}+{1}] Enter the device serial").format(Fore.RED, Fore.WHITE))
 	dev = input(arrow + " adbsploit" + Fore.RED + "(select) " + Fore.WHITE + "> ")
     output = adbutils.adb.device(serial=dev)
     global device
@@ -300,7 +300,7 @@ def dumpsys():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# dump the apps in the target phone
+# dump the apps in the target device
 def list_apps():
     global device
     if device != 'none':
@@ -330,7 +330,7 @@ def wpa_supplicant():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# install any apk in the target phone
+# install any apk in the target device
 def install():
     global device
     if device != 'none':
@@ -346,7 +346,7 @@ def install():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))      
 
-# install apk from a remote server using url in the target phone
+# install apk from a remote server using url in the target device
 def install_remote():
     global device
     if device != 'none':
@@ -362,7 +362,7 @@ def install_remote():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# uninstall apps in the target phone
+# uninstall apps in the target device
 def uninstall():
     global device
     if device != 'none':
@@ -379,3 +379,13 @@ def uninstall():
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
 		
+# open a shell in the target device
+def shell():
+    global device
+    if device != 'none':
+        try:
+            os.system("adb -s " + device + " shell")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred opening the shell...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
