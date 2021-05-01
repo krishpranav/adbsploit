@@ -488,3 +488,18 @@ def stop_app():
             print(arrow + ("[{0}+{1}] An error ocurred stopping the app...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# clear app data
+def clear_app():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the name of the app (ex: com.whatsapp) ").format(Fore.RED, Fore.WHITE))
+            app = input(arrow + " adbsploit" + Fore.RED + "(clear_app) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            d.app_clear(app)
+            print(Fore.GREEN + "The app " + app + " is now clear...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred starting the app...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
