@@ -270,3 +270,23 @@ def forward():
         print(Fore.GREEN + "The port forward is now active...")
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# wifi showing
+def wifi():
+    global device
+    if device != 'none':
+        d = adbutils.adb.device(device)
+        print(("[{0}+{1}] Enter the state of the wifi (ON/OFF)").format(Fore.RED, Fore.WHITE))
+        state = input(arrow + " adbsploit" + Fore.RED + "(wifi) " + Fore.WHITE + "> ")
+        if state == 'on' or state == 'ON':
+            d.shell('svc wifi enable')
+            print(arrow + Fore.GREEN + 'The wifi is now enabled on the device')
+        elif state == 'off' or state == 'OFF':
+            d.shell('svc wifi disable')
+            print(
+                arrow + Fore.GREEN + 'The wifi is now disabled on the device. To turn it on again you must plugged in')
+        else:
+            print(arrow + ("[{0}+{1}] That state doesn't exists").format(Fore.RED, Fore.WHITE))
+            wifi()
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
