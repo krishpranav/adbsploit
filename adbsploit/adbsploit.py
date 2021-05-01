@@ -213,3 +213,10 @@ def devices():
         table.add_row(d.serial, d.prop.model, d.prop.name, d.prop.device)
     console = Console()
     console.print(table)
+
+# connecting to phone service
+def connect():
+    print(("[{0}+{1}] Enter the phone IP address to connect").format(Fore.RED, Fore.WHITE))
+    dev = input(arrow + " adbsploit" + Fore.RED + "(connect) " + Fore.WHITE + "> ")
+    output = adbutils.adb.connect(dev)
+    print(arrow + Fore.GREEN + " * " + output)
