@@ -791,3 +791,26 @@ def remove_password():
             print(arrow + ("[{0}+{1}] An error ocurred removing the password...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# swipe the screen
+def swipe():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify sx in the screen").format(Fore.RED, Fore.WHITE))
+            sx = input(arrow + " adbsploit" + Fore.RED + "(swipe) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Specify sy in the screen").format(Fore.RED, Fore.WHITE))
+            sy = input(arrow + " adbsploit" + Fore.RED + "(swipe) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Specify ex in the screen").format(Fore.RED, Fore.WHITE))
+            ex = input(arrow + " adbsploit" + Fore.RED + "(swipe) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Specify ey in the screen").format(Fore.RED, Fore.WHITE))
+            ey = input(arrow + " adbsploit" + Fore.RED + "(swipe) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Specify the duration").format(Fore.RED, Fore.WHITE))
+            duration = input(arrow + " adbsploit" + Fore.RED + "(swipe) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            d.swipe(sx, sy, ex, ey, duration)
+            print(arrow + Fore.GREEN + ("The swipe is made..."))
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred during the swipe...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
