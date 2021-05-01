@@ -942,3 +942,67 @@ def tcpip():
             print(arrow + ("[{0}+{1}] An error ocurred enabling the tcpip mode..").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# extract contacts
+def extract_contacts():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] This option is still in BETA").format(Fore.RED, Fore.WHITE))
+            d = adbutils.adb.device(device)
+            output = d.shell("content query --uri content://contacts/phones/  --projection display_name:number:notes ")
+            print(output)
+            d.shell("content query --uri content://contacts/phones/  --projection display_name:number:notes ")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred extracting the contacts...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+def extract_sms():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] This option is still in BETA").format(Fore.RED, Fore.WHITE))
+            d = adbutils.adb.device(device)
+            output = d.shell("content query --uri content://sms/ --projection _id:address:date:body")
+            print(output)
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred extracting sms...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+#todo
+def delete_sms():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] This option is still in BETA").format(Fore.RED, Fore.WHITE))
+            d = adbutils.adb.device(device)
+            print(arrow + ("[{0}+{1}] Specify row id").format(Fore.RED, Fore.WHITE))
+            row = input(arrow + " adbsploit" + Fore.RED + "(delete-sms) " + Fore.WHITE + "> ")
+            d.shell("content delete --uri content://sms/ --where" + '"row=' + "'" + row + "'" + '"')
+            print('SMS Deleted')
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred deleting the sms...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+
+def send_sms():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] This option is still in BETA").format(Fore.RED, Fore.WHITE))
+            d = adbutils.adb.device(device)
+            print(arrow + ("[{0}+{1}] Specify the phone number (+34600112233)").format(Fore.RED, Fore.WHITE))
+            number = input(arrow + " adbsploit" + Fore.RED + "(send-sms) " + Fore.WHITE + "> ")
+            print(arrow + ("[{0}+{1}] Specify the sms message").format(Fore.RED, Fore.WHITE))
+            message = input(arrow + " adbsploit" + Fore.RED + "(send-sms) " + Fore.WHITE + "> ")
+            d.shell(
+                "service call isms 7 i32 0 s16 " + "com.android.mms.service " + "s16 " + '"' + number + '"' + " s16 " + '"null"' + " s16 " + '"' + message + '"' + ' s16 "null" s16 "null"')
+            print(arrow + Fore.GREEN + 'SMS Sent correctly...')
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred sending the sms...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
