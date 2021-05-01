@@ -644,3 +644,18 @@ def dump_hierarchy():
             print(arrow + ("[{0}+{1}] An error ocurred dumping hierarchy...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# keyevnt
+def keyevent():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the keyevent").format(Fore.RED, Fore.WHITE))
+            key = input(arrow + " adbsploit" + Fore.RED + "(keyevent) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            d.keyevent(key)
+            print(arrow + Fore.GREEN + "They key event is processed correctly...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred dumping hierarchy...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
