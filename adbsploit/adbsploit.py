@@ -897,3 +897,20 @@ def screenshot():
             print(arrow + ("[{0}+{1}] An error ocurred making the screenshot...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# dump memory info
+def dump_meminfo():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the meminfo (all/package_name)").format(Fore.RED, Fore.WHITE))
+            app = input(arrow + " adbsploit" + Fore.RED + "(dump_meminfo) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            if app == 'all':
+                print(arrow + Fore.GREEN + d.shell("dumpsys meminfo"))
+            else:
+                print(arrow + Fore.GREEN + d.shell("dumpsys meminfo " + app))
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred dumping the meminfo...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
