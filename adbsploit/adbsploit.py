@@ -814,3 +814,24 @@ def swipe():
             print(arrow + ("[{0}+{1}] An error ocurred during the swipe...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# status of screen
+def screen():
+    global device
+    if device != 'none':
+        try:
+            print(arrow + ("[{0}+{1}] Specify the status of the screen (on/off)").format(Fore.RED, Fore.WHITE))
+            status = input(arrow + " adbsploit" + Fore.RED + "(screen) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            if status == 'on':
+                d.switch_screen(True)
+                print(arrow + Fore.GREEN + ("The screen is on..."))
+            elif status == 'off':
+                d.switch_screen(False)
+                print(arrow + Fore.GREEN + ("The screen is off..."))
+            else:
+                print(Fore.RED + "That option doesn't exists...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred during the swipe...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
