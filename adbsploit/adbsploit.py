@@ -1242,3 +1242,20 @@ def remote_control():
             print(arrow + ("[{0}+{1}] An error ocurred streaming the screen...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# TODO
+def evil_app():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            print(arrow + ("[{0}+{1}] Specify the App you want to infect: (com.whatsapp)").format(Fore.RED, Fore.WHITE))
+            app = input(arrow + " adbsploit" + Fore.RED + "(kill-process) " + Fore.WHITE + "> ")
+            path = d.shell("pm path " + app)
+            d.shell("pull " + path[8:])
+
+
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred killing the process...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
