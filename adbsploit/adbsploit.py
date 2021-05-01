@@ -345,3 +345,21 @@ def install():
                 arrow + Fore.RED + 'An error has been occurred installing the APK. Check the path or the error related')
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))      
+
+# get folders in the target phone
+def getdata():
+	global device 
+	if device != 'none':
+		try:
+			print(("[{0}+{1}] Cannot able to find any folder in the target device").format(Fore.RED, Fore.WHITE))
+			data = input(arrow + " ls -la" + Fore.RED + "(get folders)" + Fore.WHITE + "> ")
+			e = adbutils.adb.device(device)
+			e.get(folder)
+			print(arrow + Fore.GREEN + 'folders found')
+			print(folders)
+		except:
+			print("An error has occured")
+	else:
+		print("you should connect to a device before contuning this exiting..")
+
+		
