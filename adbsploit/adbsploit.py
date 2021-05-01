@@ -313,4 +313,19 @@ def list_apps():
         console = Console()
         console.print(table)
     else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# get wpa supplication
+def wpa_supplicant():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            d.shell("su -c 'cp /data/misc/wifi/wpa_supplicant.conf /sdcard/'")
+            d.sync.pull("/sdcard/wpa_supplicant.conf", "wpa_supplicant.conf")
+            # d.shell(device + " pull /sdcard/wpa_supplicant.conf "+location)
+            print(arrow + Fore.GREEN + 'WPA Supplicant exported correctly')
+        except:
+            print(arrow + Fore.RED + 'An error has been occurred grabbing the wpa_supplicant')
+    else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))      
