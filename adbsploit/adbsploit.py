@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# imports
 import os
 import shutil
 import subprocess
@@ -1345,7 +1349,7 @@ def version():
     console = Console()
     console.print(table)
 
-# help
+# help table
 def help():
     table = Table()
     table.add_column("Command", style="cyan")
@@ -1386,7 +1390,6 @@ def help():
     console.print(table)
 
 # run script
-
 if __name__ == '__main__':
     f = Figlet()
     list = ["graffiti", "slant", "avatar", "bell", "big", "doom",
