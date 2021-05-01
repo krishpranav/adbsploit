@@ -771,3 +771,23 @@ def open_browser():
             print(arrow + ("[{0}+{1}] An error ocurred opening the url...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# remove password from the phone
+def remove_password():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            print(arrow + Fore.RED + 'Trying to remove lockscreen password...')
+            d1 = d.shell("su 0 'rm /data/system/gesture.key'")
+            print(arrow + d1)
+            d2 = d.shell("su 0 'rm /data/system/locksettings.db'")
+            print(arrow + d2)
+            d3 = d.shell("su 0 'rm /data/system/locksettings.db-wal'")
+            print(arrow + d3)
+            d4 = d.shell("su 0 'rm /data/system/locksettings.db-shm'")
+            print(arrow + d4)
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred removing the password...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
