@@ -389,3 +389,29 @@ def shell():
             print(arrow + ("[{0}+{1}] An error ocurred opening the shell...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# shut down the target device
+def shutdown():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            d.shell('reboot -p')
+            print(arrow + Fore.GREEN + 'The device is shutting down...')
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred shutting down the device").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+    
+# reboot the target function
+def reboot():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            d.shell('reboot')
+            print(arrow + Fore.GREEN + 'The device is rebooting...')
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred opening the shell...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
