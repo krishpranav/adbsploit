@@ -299,3 +299,18 @@ def dumpsys():
         print(arrow + d.shell(device + ' dumpsys'))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# dump the apps in the target phone
+def list_apps():
+    global device
+    if device != 'none':
+        d = adbutils.adb.device(device)
+        apps = d.list_packages()
+        table = Table()
+        table.add_column("App", style="cyan")
+        for a in apps:
+            table.add_row(a)
+        console = Console()
+        console.print(table)
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))      
