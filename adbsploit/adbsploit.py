@@ -201,4 +201,15 @@ def main():
         print(arrow + Fore.RED + " That command doesn't exists...")
         main()
 
-    
+# service function
+def devices():
+    '''devices'''
+    table = Table()
+    table.add_column("Device detected", style="cyan")
+    table.add_column("Model", style="magenta")
+    table.add_column("Name", style="magenta")
+    table.add_column("Device", style="magenta")
+    for d in adbutils.adb.device_list():
+        table.add_row(d.serial, d.prop.model, d.prop.name, d.prop.device)
+    console = Console()
+    console.print(table)
