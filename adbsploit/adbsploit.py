@@ -858,3 +858,29 @@ def unlock_screen():
             print(arrow + ("[{0}+{1}] An error ocurred unlocking the device...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# lock screen
+def lock_screen():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            d.keyevent(26)
+            print(Fore.GREEN + "The screen is now locked...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred unlocking the device...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# show mac address
+def show_macaddress():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            print(arrow + Fore.GREEN + d.shell("cat /sys/class/net/wlan0/address"))
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred showing the mac address...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+        
