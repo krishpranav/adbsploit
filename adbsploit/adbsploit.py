@@ -1333,3 +1333,14 @@ def clear():
     print("v0.3" + "\t \t \t \t" + "Developed by MesQ at " + Fore.RED + "https://github.com/krishpranav/adbsploit ")
     print("")
     print(Fore.WHITE + "Type" + Fore.RED + " help " + Fore.WHITE + "for more info")
+
+# shows version of the tool
+def version():
+    """Show the version of the tool"""
+    table = Table()
+    table.add_column("Version", style="cyan")
+    table.add_column("URL", style="magenta")
+    table.add_column("Developed", style="magenta")
+    table.add_row('0.2.1', "https://github.com/krishpranav/adbsploit", 'MesQ')
+    console = Console()
+    console.print(table)
