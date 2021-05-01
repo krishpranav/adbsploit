@@ -1032,3 +1032,16 @@ def device_info():
             print(arrow + ("[{0}+{1}] An error ocurred getting the current app...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# recovery mode
+def recovery_mode():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            d.shell("reboot recovery")
+            print(arrow+Fore.GREEN+"Entering in recovery mode...")
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred entering in recovery mode...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
