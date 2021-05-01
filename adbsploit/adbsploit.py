@@ -1,24 +1,19 @@
-#!/usr/bin/env/python3
-# -*- coding: utf-8 -*-
-
-# imports
 import os
 import shutil
 import subprocess
 import sys
 import random
-import adbutils
 
+import adbutils
 from colorama import Fore
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.table import Table
 
-# variables and main
 arrow = Fore.RED + " └──>" + Fore.WHITE
 device = 'none'
 
-# main 
+
 def main():
     command = input(Fore.WHITE + "adbsploit" + Fore.RED + "(" + device + ")" + Fore.WHITE + " > ")
     if command == 'help':
@@ -201,9 +196,12 @@ def main():
         print(arrow + Fore.RED + " That command doesn't exists...")
         main()
 
-# service function
+
+# *******************************************************************************
+# Functions
+
+# show connected devices
 def devices():
-    '''devices'''
     table = Table()
     table.add_column("Device detected", style="cyan")
     table.add_column("Model", style="magenta")
@@ -214,29 +212,28 @@ def devices():
     console = Console()
     console.print(table)
 
-# connecting to device service
+# function for connecting to the target phone
 def connect():
-    print(("[{0}+{1}] Enter the device IP address to connect").format(Fore.RED, Fore.WHITE))
+    print(("[{0}+{1}] Enter the phone IP address to connect").format(Fore.RED, Fore.WHITE))
     dev = input(arrow + " adbsploit" + Fore.RED + "(connect) " + Fore.WHITE + "> ")
     output = adbutils.adb.connect(dev)
     print(arrow + Fore.GREEN + " * " + output)
 
-# selecting the devices
+# select phone
 def select():
-	print(("[{0}+{1}] Enter the device serial").format(Fore.RED, Fore.WHITE))
-	dev = input(arrow + " adbsploit" + Fore.RED + "(select) " + Fore.WHITE + "> ")
+    print(("[{0}+{1}] Enter the phone serial").format(Fore.RED, Fore.WHITE))
+    dev = input(arrow + " adbsploit" + Fore.RED + "(select) " + Fore.WHITE + "> ")
     output = adbutils.adb.device(serial=dev)
     global device
     try:
-    	output.is_screen_on()
-    	print("Selected device: " + Fore.GREEN + output.serial)
-    	device = output.serial
-    	main()
+        output.is_screen_on()
+        print("Selected device: " + Fore.GREEN + output.serial)
+        device = output.serial
+        main()
     except:
-    	print(arrow + ("[{0}+{1}] That device doesn't exist...").format(Fore.RED, Fore.WHITE))
+        print(arrow + ("[{0}+{1}] That device doesn't exist...").format(Fore.RED, Fore.WHITE))
 
-
-# list for device port
+# lists
 def list_forward():
     global device
     table = Table()
@@ -271,7 +268,7 @@ def forward():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# wifi showing
+# show the wifi near the target device
 def wifi():
     global device
     if device != 'none':
@@ -300,7 +297,7 @@ def dumpsys():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# dump the apps in the target device
+# list all apps
 def list_apps():
     global device
     if device != 'none':
@@ -315,7 +312,7 @@ def list_apps():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# get wpa supplication
+# wpa shows
 def wpa_supplicant():
     global device
     if device != 'none':
@@ -330,7 +327,7 @@ def wpa_supplicant():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# install any apk in the target device
+# install apk in the target phone
 def install():
     global device
     if device != 'none':
@@ -344,9 +341,9 @@ def install():
             print(
                 arrow + Fore.RED + 'An error has been occurred installing the APK. Check the path or the error related')
     else:
-        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))      
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# install apk from a remote server using url in the target device
+# install from a remote serer 
 def install_remote():
     global device
     if device != 'none':
@@ -362,7 +359,7 @@ def install_remote():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# uninstall apps in the target device
+# uninstall apps from the target phone
 def uninstall():
     global device
     if device != 'none':
@@ -378,8 +375,7 @@ def uninstall():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-		
-# open a shell in the target device
+# spawn a shell
 def shell():
     global device
     if device != 'none':
@@ -390,7 +386,7 @@ def shell():
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
-# shut down the target device
+# shut down target phone 
 def shutdown():
     global device
     if device != 'none':
@@ -402,8 +398,8 @@ def shutdown():
             print(arrow + ("[{0}+{1}] An error ocurred shutting down the device").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
-    
-# reboot the target function
+
+# reboot the target phone
 def reboot():
     global device
     if device != 'none':
@@ -415,3 +411,11 @@ def reboot():
             print(arrow + ("[{0}+{1}] An error ocurred opening the shell...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# kill server
+def kill_server():
+    try:
+        adbutils.adb.server_kill()
+        print(arrow + Fore.GREEN + 'The server is down...')
+    except:
+        print(arrow + ("[{0}+{1}] An error ocurred killing the server...").format(Fore.RED, Fore.WHITE))
