@@ -503,3 +503,16 @@ def clear_app():
             print(arrow + ("[{0}+{1}] An error ocurred starting the app...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# show ip of the target phone
+def show_ip():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            ip = d.wlan_ip()
+            print(arrow + Fore.GREEN + ip)
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred showing the ip...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
