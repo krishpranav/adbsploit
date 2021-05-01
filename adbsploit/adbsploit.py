@@ -290,3 +290,12 @@ def wifi():
             wifi()
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# dump sys info
+def dumpsys():
+    global device
+    if device != 'none':
+        d = adbutils.adb.device(device)
+        print(arrow + d.shell(device + ' dumpsys'))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
