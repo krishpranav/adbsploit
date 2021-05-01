@@ -220,3 +220,19 @@ def connect():
     dev = input(arrow + " adbsploit" + Fore.RED + "(connect) " + Fore.WHITE + "> ")
     output = adbutils.adb.connect(dev)
     print(arrow + Fore.GREEN + " * " + output)
+
+# selecting the phones
+def select():
+	print(("[{0}+{1}] Enter the phone serial").format(Fore.RED, Fore.WHITE))
+	dev = input(arrow + " adbsploit" + Fore.RED + "(select) " + Fore.WHITE + "> ")
+    output = adbutils.adb.device(serial=dev)
+    global device
+    try:
+    	output.is_screen_on()
+    	print("Selected device: " + Fore.GREEN + output.serial)
+    	device = output.serial
+    	main()
+    except:
+    	print(arrow + ("[{0}+{1}] That device doesn't exist...").format(Fore.RED, Fore.WHITE))
+
+
