@@ -236,3 +236,23 @@ def select():
     	print(arrow + ("[{0}+{1}] That device doesn't exist...").format(Fore.RED, Fore.WHITE))
 
 
+# list for device port
+def list_forward():
+    global device
+    table = Table()
+    table.add_column("Device", style="cyan")
+    table.add_column("Local Port", style="magenta")
+    table.add_column("Remote Port", style="magenta")
+    if device != 'none':
+        # list only one device forwards
+        for item in adbutils.adb.forward_list(device):
+            table.add_row(item.serial, item.local, item.remote)
+        console = Console()
+        console.print(table)
+    else:
+        # list all forwards
+        for item in adbutils.adb.forward_list():
+            table.add_row(item.serial, item.local, item.remote)
+        console = Console()
+        console.print(table)
+			
