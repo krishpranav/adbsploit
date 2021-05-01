@@ -1017,3 +1017,18 @@ def current_app():
             print(arrow + ("[{0}+{1}] An error ocurred getting the current app...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+    
+# shows device info
+def device_info():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            print(arrow + "Product Model: "+ Fore.GREEN + d.shell("getprop ro.product.model"))
+            print(arrow + "Android Version: " + Fore.GREEN + d.shell("getprop ro.build.version.release"))
+            print(arrow + "Android Id: " + Fore.GREEN + d.shell("settings get secure android_id"))
+            print(arrow + "IMEI: " + Fore.GREEN + d.shell("service call iphonesubinfo 1"))
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred getting the current app...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
