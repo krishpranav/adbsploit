@@ -545,4 +545,15 @@ def battery():
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
 
 # netstat run in the target device
-
+def netstat():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            bat = d.shell("netstat")
+            print(arrow + Fore.GREEN + "The netstat for device " + device + " is:")
+            print(Fore.MAGENTA + bat)
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred getting the netstat...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
