@@ -530,3 +530,19 @@ def appinfo():
             print(arrow + ("[{0}+{1}] An error ocurred obtaining the info...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# show battery in the target phone
+def battery():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            bat = d.shell("dumpsys battery")
+            print(Fore.GREEN + bat)
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred obtaining the battery info...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# netstat run in the target device
+
