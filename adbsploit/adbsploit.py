@@ -255,4 +255,18 @@ def list_forward():
             table.add_row(item.serial, item.local, item.remote)
         console = Console()
         console.print(table)
-			
+
+# port forward
+def forward():
+    global device
+    if device != 'none':
+        print(("[{0}+{1}] Enter the local port to foward").format(Fore.RED, Fore.WHITE))
+        local = input(arrow + " adbsploit" + Fore.RED + "(forward) " + Fore.WHITE + "> ")
+        print(("[{0}+{1}] Enter the remote port to forward").format(Fore.RED, Fore.WHITE))
+        remote = input(arrow + " adbsploit" + Fore.RED + "(forward) " + Fore.WHITE + "> ")
+        d = adbutils.adb.device(device)
+        output = d.forward(local, remote)
+        print(output)
+        print(Fore.GREEN + "The port forward is now active...")
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
