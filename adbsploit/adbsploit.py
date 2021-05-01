@@ -616,3 +616,19 @@ def sound():
             print(arrow + ("[{0}+{1}] An error ocurred with the sound...").format(Fore.RED, Fore.WHITE))
     else:
         print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
+
+# function for checking the target device screen is in off or on
+def check_screen():
+    global device
+    if device != 'none':
+        try:
+            d = adbutils.adb.device(device)
+            screen = d.is_screen_on()
+            if screen == True:
+                print(arrow + Fore.GREEN + 'The screen is on...')
+            else:
+                print(arrow + Fore.GREEN + 'The screen is off...')
+        except:
+            print(arrow + ("[{0}+{1}] An error ocurred checking the screen...").format(Fore.RED, Fore.WHITE))
+    else:
+        print(arrow + ("[{0}+{1}] You must select a device before...").format(Fore.RED, Fore.WHITE))
